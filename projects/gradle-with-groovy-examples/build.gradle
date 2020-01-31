@@ -61,6 +61,32 @@ Map m = new HashMap()
 m.fred = p1
 println m.fred.name
 
+// Closures (another name for lambdas)
+def emptyClosure = { }
+println emptyClosure
+def helloClosures = {
+	"Hello, Closures?"
+}
+println helloClosures()
+def echoItWithEmphasis = { s -> s + "!" }
+println echoItWithEmphasis("plop")
+def typedEchoItWithEmphasis = { String s -> s + "!" }
+println typedEchoItWithEmphasis("plink")
+def conciseEchoItWithEmphasis = { it + "!" }
+println conciseEchoItWithEmphasis("BLAM")
+// 'Closure' is a type in Groovy
+Closure<String> myClosure = conciseEchoItWithEmphasis
+println myClosure("POW")
+
+// Passing a closure as a function parameter
+def anotherClosure = { 42 }
+def someFunctionThatNeedsClosure(Closure<Number> closure) {
+	closure() * 2
+}
+println someFunctionThatNeedsClosure(anotherClosure)
+println someFunctionThatNeedsClosure { 11 }
+
+
 
 // This was added by IntelliJ when the project skeleton was created
 group 'com.jimtough'
