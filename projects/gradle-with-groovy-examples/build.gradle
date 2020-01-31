@@ -10,9 +10,17 @@ System.out.println "Hello again! The current time is now: " + LocalDateTime.now(
 // Note that the function call appears BEFORE the function declaration. Not a problem.
 sayHelloWorld()
 void sayHelloWorld() {
-	print "Hello, World! (for the bazillionth time)"
+	println "Hello, World! (for the bazillionth time)"
 }
 
+println 33 + " doubled is " + doubleMe(33)
+int doubleMe(int n) {
+	// these expressions are just ignored
+	111
+	222
+	// value of last expression in function is returned
+	n * 2
+}
 
 // This was added by IntelliJ when the project skeleton was created
 group 'com.jimtough'
