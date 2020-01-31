@@ -40,6 +40,27 @@ println "The value of s1 is [$s1]"
 def someInt = 123
 println "If I double the value $someInt I get ${doubleMe(someInt)}."
 
+// Groovy class declaration
+class Person {
+	String name
+	Integer age
+	Person (name, age) {
+		this.name = name
+		this.age = age
+	}
+}
+
+// Declaring an instance
+def p1 = new Person("Fred", 35)
+// Groovy gives you getters and setters for free
+p1.age = 69
+println "name: ${p1.name} | age: ${p1.age}"
+
+// Using Map
+Map m = new HashMap()
+m.fred = p1
+println m.fred.name
+
 
 // This was added by IntelliJ when the project skeleton was created
 group 'com.jimtough'
