@@ -1,3 +1,6 @@
 projects/bare-minimum-gradle/.gradle/
 projects/bare-minimum-gradle/.idea/
 projects/bare-minimum-gradle/gradle/wrapper/gradle-wrapper.jar
+projects/gradle-with-groovy-examples/.gradle/
+projects/gradle-with-groovy-examples/.idea/
+projects/gradle-with-groovy-examples/gradle/wrapper/gradle-wrapper.jar
