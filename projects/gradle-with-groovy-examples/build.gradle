@@ -22,5 +22,24 @@ int doubleMe(int n) {
 	n * 2
 }
 
+def s1 = "a Groovy string"
+def s2 = 'also a Groovy string'
+def s3 = """
+	A
+	string
+	on
+	multiple
+	lines
+"""
+println s1
+println s2
+println s3
+
+// String interpolation
+println "The value of s1 is [$s1]"
+def someInt = 123
+println "If I double the value $someInt I get ${doubleMe(someInt)}."
+
+
 // This was added by IntelliJ when the project skeleton was created
 group 'com.jimtough'
