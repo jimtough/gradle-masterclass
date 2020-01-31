@@ -1,2 +1,18 @@
-group 'com.jimtough'
+// Java import required because we are using Java classes below
+import java.time.LocalDateTime
 
+// Groovy code
+println "Hello, World!"
+// Core Java classes mixed in with Groovy code
+System.out.println "Hello again! The current time is now: " + LocalDateTime.now() + "."
+
+// Inline Groovy code in the build script
+// Note that the function call appears BEFORE the function declaration. Not a problem.
+sayHelloWorld()
+void sayHelloWorld() {
+	print "Hello, World! (for the bazillionth time)"
+}
+
+
+// This was added by IntelliJ when the project skeleton was created
+group 'com.jimtough'
