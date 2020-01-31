@@ -1,3 +1,7 @@
 group 'com.jimtough'
 version '1.0-SNAPSHOT'
 
+// Add a trivial task named 'hello'
+task ('hello').doLast {
+	println "Hello World!"
+}
