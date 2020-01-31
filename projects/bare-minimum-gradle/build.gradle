@@ -1,5 +1,9 @@
-group 'com.jimtough'
-version '1.0-SNAPSHOT'
+println "Hello, System.out?"
+
+logger.info "Hello, logger!"
+
+// Example of using the 'apply' function
+apply { println "Inside my 'apply' closure" }
 
 defaultTasks 'hello'
 
@@ -7,3 +11,5 @@ defaultTasks 'hello'
 task ('hello').doLast {
 	println "Hello World!"
 }
+
+group 'com.jimtough'
