@@ -50,3 +50,13 @@ Gradle diagnostic information to be displayed in the console.
   * The `settings.gradle` script delegates to a 'Settings' interface object
     * NOTE: `settings.gradle` is most relevant when working with multi-project builds
   * The 'Gradle' interface object can be accessed by other interface objects
+* Gradle will automatically read a file named 'gradle.properties' if it exists in the root directory of your project
+  * Will also use 'gradle.properties' if it lives in the GRADLE_USER_HOME directory
+    * `-Dgradle.user.home` system property can be used to explicitly define this location
+  * Individual key/value property pair can be provided on command line as:
+    * `-PmyPropKey=myPropValue`
+* Some Gradle object types support 'extra properties'
+  * REF: https://docs.gradle.org/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html
+  * example: `project.ext.hello = "World"`
+    * This creates an 'extra property' with key 'hellooo' and value "World" to the Project interface object
+    * Reading the property is done like any other property: `logger.info hellooo`

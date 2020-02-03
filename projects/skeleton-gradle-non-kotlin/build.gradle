@@ -45,3 +45,51 @@ Base directory: $projectDir
 Running script  ${relativePath(buildFile)}
 ******************************************************************************
 """
+
+//-----------------------------------------------------------------------------
+// Getting the properties I set in my 'gradle.properties' file.
+// Looks like I can reference them directly from this context (build.gradle / Project interface)
+logger.info "--------------------------------------"
+logger.info "Values from my gradle.properties file:"
+logger.info "--------------------------------------"
+logger.info "foo: [$foo]"
+logger.info "hello: [$hello]"
+logger.info "myKey: [$myKey]"
+// Can use the 'hasProperty()' function explicitly via 'project', or implicitly from build.gradle
+//logger.info "Has property 'foo'?: ${project.hasProperty('foo')}"
+logger.info "Has property 'foo'?: ${hasProperty('foo')}"
+logger.info "Has property 'bogus'?: ${hasProperty('bogus')}"
+logger.info "--------------------------------------"
+
+// Execute conditional code based on existence of a property
+if( hasProperty('foo') ) {
+	logger.info "The property 'foo' (from gradle.properties) has value [$foo]"
+}else{
+	logger.warn "The property 'foo' is not defined!"
+}
+if( hasProperty('bogus') ) {
+	logger.info "The property 'bogus' (from gradle.properties) has value [$bogus]"
+}else{
+	logger.warn "The property 'bogus' is not defined!"
+}
+
+project.ext.hellooo = "World"
+if( hasProperty('hellooo') ) {
+	logger.info hellooo
+	logger.info "The (extra) property 'hellooo' has value [$hellooo]"
+}else{
+	logger.warn "The property 'hellooo' is not defined!"
+}
+
+// Check is Closure property is defined, then execute it
+if( project.gradle.hasProperty('timestamp') ) {
+	logger.info "The (Closure) property 'gradle.timestamp' evaluates to: [${gradle.timestamp()}]"
+}else{
+	logger.warn "The property 'gradle.timestamp' is not defined!"
+}
+// Alternate way to do this
+if( project.gradle.ext.has('timestamp') ) {
+	logger.info "The (Closure) property 'gradle.ext.timestamp' evaluates to: [${gradle.timestamp()}]"
+}else{
+	logger.warn "The property 'gradle.ext.timestamp' is not defined!"
+}

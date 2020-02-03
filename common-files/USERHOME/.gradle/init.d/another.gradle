@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat
 
+// Remember - This property is a Closure (function code), not a string.
+// The 'timestamp' property needs to be executed as code each time, not referenced as a string.
 gradle.ext.timestamp = {
 	def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 	df.setTimeZone(TimeZone.getTimeZone("UTC"))
