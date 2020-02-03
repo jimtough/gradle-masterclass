@@ -1,1 +1,12 @@
 logger.info "init.gradle (from USERHOME/.gradle/init.d/) | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
+
+// init.gradle delegates to the 'Gradle' interface object. We can refer to it explicitly, as seen below...
+//logger.info "build.gradle | gradle.gradleVersion: $gradle.gradleVersion"
+// ...but the Gradle interface properties are also implicitly available
+logger.info "init.gradle | gradleVersion: $gradleVersion"
+logger.info "init.gradle | gradleHomeDir: $gradleHomeDir"
+logger.info "init.gradle | gradleUserHomeDir: $gradleUserHomeDir"
+
+// REFERENCE - API docs for the Gradle interface object
+// https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html
+logger.info "init.gradle | Parent build of this build: $parent"
