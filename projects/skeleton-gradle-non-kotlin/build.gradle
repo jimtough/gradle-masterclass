@@ -5,13 +5,15 @@
 group 'com.jimtough'
 version '1.0-SNAPSHOT'
 
-defaultTasks("hi", "hello", "hello2")
+//defaultTasks 'hi', 'hello', 'hello2'
+
+// 'doFinished' will be run in the Execution Phase, plus any Tasks it declared in its 'dependsOn' list.
+// The 'dependsOn' tasks will be triggered to run before it.
+defaultTasks 'doFinished'
 
 //-----------------------------------------------------------------------------
 // EXAMPLES OF SIMPLE TASKS WITH NO DEPENDENCIES
 //-----------------------------------------------------------------------------
-
-defaultTasks("hi", "hello", "hello2")
 
 // Define a Task named 'hi', but do not implement it here
 task hi
@@ -59,28 +61,61 @@ hello2.doLast {
 }
 
 //-----------------------------------------------------------------------------
+// EXAMPLES OF SIMPLE TASKS WITH DEPENDENCIES
+//-----------------------------------------------------------------------------
+
+task doStartProcess {
+	doLast{
+		logger.info "$name - EXECUTED"
+	}
+}
+
+task doStep2 {
+	doLast{
+		logger.info "$name - EXECUTED"
+	}
+}
+
+// This Task will trigger 'doStartProcess' and 'doStep2' to run before it.
+// The dependsOn tasks will be triggered regardless of whether or not they were explicitly reqeusted to run elsewhere.
+task doSomethingInTheMiddle (dependsOn: ['doStartProcess', 'doStep2']) {
+	doLast{
+		logger.info "$name - EXECUTED"
+	}
+}
+
+// This Task will trigger 'doSomethingInTheMiddle' and 'doStep2' to run before it.
+// The dependsOn tasks will be triggered regardless of whether or not they were explicitly reqeusted to run elsewhere.
+task doFinished (dependsOn: ['doSomethingInTheMiddle', 'doStep2']) {
+	doLast{
+		logger.info "$name - EXECUTED"
+	}
+}
+
+
+//-----------------------------------------------------------------------------
 
 logger.info "build.gradle | EXECUTED"
 
 // build.gradle delegates to the 'Project' interface object. We can refer to it explicitly, as seen below...
 //logger.info "build.gradle | project.gradle.gradleVersion: $project.gradle.gradleVersion"
 // ...but the Project interface properties are also implicitly available
-logger.info "build.gradle | gradle.gradleVersion: $gradle.gradleVersion"
-logger.info "build.gradle | gradle.gradleHomeDir: $gradle.gradleHomeDir"
-logger.info "build.gradle | gradle.gradleUserHomeDir: $gradle.gradleUserHomeDir"
-logger.info "build.gradle | buildFile: $buildFile"
-logger.info "build.gradle | projectDir: $projectDir"
+//logger.info "build.gradle | gradle.gradleVersion: $gradle.gradleVersion"
+//logger.info "build.gradle | gradle.gradleHomeDir: $gradle.gradleHomeDir"
+//logger.info "build.gradle | gradle.gradleUserHomeDir: $gradle.gradleUserHomeDir"
+//logger.info "build.gradle | buildFile: $buildFile"
+//logger.info "build.gradle | projectDir: $projectDir"
 // Example of using a Project interface method: relativePath()
-logger.info "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
+//logger.info "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
 
 // REFERENCE - API docs for the Project interface object
 // https://docs.gradle.org/current/dsl/org.gradle.api.Project.html
-logger.info "build.gradle | buildDir: $buildDir"
-logger.info "build.gradle | defaultTasks: $defaultTasks"
-logger.info "build.gradle | group: $group"
-logger.info "build.gradle | name: $name"
-logger.info "build.gradle | version: $version"
-logger.info "build.gradle | status: $status"
+//logger.info "build.gradle | buildDir: $buildDir"
+//logger.info "build.gradle | defaultTasks: $defaultTasks"
+//logger.info "build.gradle | group: $group"
+//logger.info "build.gradle | name: $name"
+//logger.info "build.gradle | version: $version"
+//logger.info "build.gradle | status: $status"
 
 /*
 multiline
@@ -91,11 +126,12 @@ comment
 logger.info """
 ******************************************************************************
 Using Gradle $gradle.gradleVersion - http://www.gradle.org
-Gradle home is set to: $gradle.gradleHomeDir
-Gradle user directory is set to: $gradle.gradleUserHomeDir
-
-Base directory: $projectDir
-Running script  ${relativePath(buildFile)}
+Gradle home:           [$gradle.gradleHomeDir]
+Gradle user directory: [$gradle.gradleUserHomeDir]
+----
+Base directory:  [$projectDir]
+Build file:      [$buildFile"]
+Running script:  [${relativePath(buildFile)}]
 ******************************************************************************
 """
 
@@ -105,14 +141,12 @@ Running script  ${relativePath(buildFile)}
 logger.info "--------------------------------------"
 logger.info "Values from my gradle.properties file:"
 logger.info "--------------------------------------"
-logger.info "foo: [$foo]"
-logger.info "myKey: [$myKey]"
+//logger.info "foo: [$foo]"
+//logger.info "myKey: [$myKey]"
 // Can use the 'hasProperty()' function explicitly via 'project', or implicitly from build.gradle
 //logger.info "Has property 'foo'?: ${project.hasProperty('foo')}"
 logger.info "Has property 'foo'?: ${hasProperty('foo')}"
 logger.info "Has property 'bogus'?: ${hasProperty('bogus')}"
-logger.info "--------------------------------------"
-
 // Execute conditional code based on existence of a property
 if( hasProperty('foo') ) {
 	logger.info "The property 'foo' (from gradle.properties) has value [$foo]"
@@ -124,6 +158,7 @@ if( hasProperty('bogus') ) {
 }else{
 	logger.warn "The property 'bogus' is not defined!"
 }
+logger.info "--------------------------------------"
 
 project.ext.hellooo = "Worlddd"
 if( hasProperty('hellooo') ) {

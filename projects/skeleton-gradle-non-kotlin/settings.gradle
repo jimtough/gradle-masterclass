@@ -1,10 +1,8 @@
-logger.info "settings.gradle | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
-
-logger.info "settings.gradle | settings.gradle.gradleVersion: $settings.gradle.gradleVersion"
-logger.info "settings.gradle | settings.gradle.gradleHomeDir: $settings.gradle.gradleHomeDir"
-logger.info "settings.gradle | settings.gradle.gradleUserHomeDir: $settings.gradle.gradleUserHomeDir"
-
-//-----------------------------------------------------------------------------
-
 rootProject.name = 'skeleton-gradle-non-kotlin'
 
+//-----------------------------------------------------------------------------
+logger.info "settings.gradle | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
+//logger.info "settings.gradle | settings.gradle.gradleVersion: $settings.gradle.gradleVersion"
+//logger.info "settings.gradle | settings.gradle.gradleHomeDir: $settings.gradle.gradleHomeDir"
+//logger.info "settings.gradle | settings.gradle.gradleUserHomeDir: $settings.gradle.gradleUserHomeDir"
+//-----------------------------------------------------------------------------
