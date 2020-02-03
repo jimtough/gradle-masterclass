@@ -60,3 +60,20 @@ Gradle diagnostic information to be displayed in the console.
   * example: `project.ext.hello = "World"`
     * This creates an 'extra property' with key 'hellooo' and value "World" to the Project interface object
     * Reading the property is done like any other property: `logger.info hellooo`
+* Important Gradle concept: **A Project is essentially a 'collection of 0 or more Tasks'**
+  * Configuration Phase:
+    * create Tasks
+    * configure Tasks
+  * Execution Phase:
+    * execute Tasks
+* Important Gradle concept: **A Task is a 'collection of 0 or more Actions'**
+  * A Task is 'a single atomic piece of work'
+  * _ref_: https://docs.gradle.org/current/dsl/org.gradle.api.Task.html
+  * Each Gradle Task has a name
+  * Tasks are held in the Project by a 'Task Container'
+  * Actions are added to a Task via two methods:
+    * doFirst()
+    * doLast()
+    * Each of these methods has two versions, but the version that accepts a Closure should be preferred
+      * Closure version also gives us a way to access the Task
+      * Closure version makes it easy to chain multiple calls together

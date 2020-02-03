@@ -5,6 +5,36 @@
 group 'com.jimtough'
 version '1.0-SNAPSHOT'
 
+defaultTasks("hi", "hello")
+
+// Define a Task named 'hi', but do not implement it here
+task hi
+
+// What a strange way of providing the implementation for my 'hi' task!
+// I'm using the doLast() method from the Task interface API to add the
+// implementation of 'hi' as a Closure.
+// NOTE: If this Task is used, it will be run in the Execution Phase.
+project.hi.doLast {
+	logger.info "Hi! :)"
+}
+project.hi.group "Greeters"
+
+
+// Now I define another Task and provide its implementation at the same time
+task hello {
+	// Inside the Closure, I can set Task properties and provide Closure code to doFirst() and doLast()
+	this.description "This Task is named 'hello', and it likes to say 'Hello!'"
+	this.group "Greeters"
+	// This is executed 2nd
+	doFirst { logger.info "My name is [$name] and this is my first 'doFirst' defined action!" }
+	// This is executed 1st
+	doFirst { logger.info "My name is [$name] and this is my second 'doFirst' defined action!" }
+	// This is executed 3rd
+	doLast { logger.info "My name is [$name] and this is my first 'doLast' defined action." }
+	// This is executed 4th
+	doLast { logger.info "My name is [$name] and this is my second 'doLast' defined action." }
+}
+
 //-----------------------------------------------------------------------------
 
 logger.info "build.gradle | EXECUTED"
