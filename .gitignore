@@ -4,3 +4,6 @@ projects/bare-minimum-gradle/gradle/wrapper/gradle-wrapper.jar
 projects/gradle-with-groovy-examples/.gradle/
 projects/gradle-with-groovy-examples/.idea/
 projects/gradle-with-groovy-examples/gradle/wrapper/gradle-wrapper.jar
+projects/skeleton-gradle-non-kotlin/.gradle/
+projects/skeleton-gradle-non-kotlin/.idea/
+projects/skeleton-gradle-non-kotlin/gradle/wrapper/gradle-wrapper.jar
