@@ -6,4 +6,4 @@ gradle.ext.timestamp = {
 	return df.format(new Date())
 }
 
-println "another.gradle (from USERHOME/.gradle/init.d/) | EXECUTED"
+logger.info "another.gradle (from USERHOME/.gradle/init.d/) | EXECUTED"

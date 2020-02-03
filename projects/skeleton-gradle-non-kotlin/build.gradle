@@ -1,11 +1,11 @@
-println "build.gradle | EXECUTED"
+logger.info "build.gradle | EXECUTED"
 
-println "build.gradle | project.gradle.gradleVersion: $project.gradle.gradleVersion"
-println "build.gradle | project.gradle.gradleHomeDir: $project.gradle.gradleHomeDir"
-println "build.gradle | project.gradle.gradleUserHomeDir: $project.gradle.gradleUserHomeDir"
-println "build.gradle | buildFile: $buildFile"
-println "build.gradle | projectDir: $projectDir"
-println "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
+logger.info "build.gradle | project.gradle.gradleVersion: $project.gradle.gradleVersion"
+logger.info "build.gradle | project.gradle.gradleHomeDir: $project.gradle.gradleHomeDir"
+logger.info "build.gradle | project.gradle.gradleUserHomeDir: $project.gradle.gradleUserHomeDir"
+logger.info "build.gradle | buildFile: $buildFile"
+logger.info "build.gradle | projectDir: $projectDir"
+logger.info "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
 
 //-----------------------------------------------------------------------------
 

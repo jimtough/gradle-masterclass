@@ -1,1 +1,1 @@
-println "init.gradle (from USERHOME/.gradle/init.d/) | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
+logger.info "init.gradle (from USERHOME/.gradle/init.d/) | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
