@@ -5,7 +5,13 @@
 group 'com.jimtough'
 version '1.0-SNAPSHOT'
 
-defaultTasks("hi", "hello")
+defaultTasks("hi", "hello", "hello2")
+
+//-----------------------------------------------------------------------------
+// EXAMPLES OF SIMPLE TASKS WITH NO DEPENDENCIES
+//-----------------------------------------------------------------------------
+
+defaultTasks("hi", "hello", "hello2")
 
 // Define a Task named 'hi', but do not implement it here
 task hi
@@ -23,8 +29,8 @@ project.hi.group "Greeters"
 // Now I define another Task and provide its implementation at the same time
 task hello {
 	// Inside the Closure, I can set Task properties and provide Closure code to doFirst() and doLast()
-	this.description "This Task is named 'hello', and it likes to say 'Hello!'"
-	this.group "Greeters"
+	description "This Task is named 'hello', and it likes to say 'Hello!'"
+	group "Greeters"
 	// This is executed 2nd
 	doFirst { logger.info "My name is [$name] and this is my first 'doFirst' defined action!" }
 	// This is executed 1st
@@ -33,6 +39,23 @@ task hello {
 	doLast { logger.info "My name is [$name] and this is my first 'doLast' defined action." }
 	// This is executed 4th
 	doLast { logger.info "My name is [$name] and this is my second 'doLast' defined action." }
+}
+
+// Add yet another 'doLast()' Action to my Task from above
+// This is executed 5th
+// NOTE: Explicitly using 'project' below for example purposes, but it can be omitted as it will be inferred
+project.hello.doLast { logger.info "My name is [$name] and this is my third 'doLast' defined action." }
+
+task hello2 {
+	description "This Task is named 'hello2', and it likes to say 'Hello! It is WAY better than regular 'hello'!"
+	group "Greeters"
+}
+hello2.doLast {
+	logger.info "My name is [$name] and this is my first 'doLast' defined action."
+}.doLast {
+	logger.info "My name is [$name] and this is my second 'doLast' defined action."
+}.doLast {
+	logger.info "My name is [$name] and this is my third 'doLast' defined action."
 }
 
 //-----------------------------------------------------------------------------
@@ -83,7 +106,6 @@ logger.info "--------------------------------------"
 logger.info "Values from my gradle.properties file:"
 logger.info "--------------------------------------"
 logger.info "foo: [$foo]"
-logger.info "hello: [$hello]"
 logger.info "myKey: [$myKey]"
 // Can use the 'hasProperty()' function explicitly via 'project', or implicitly from build.gradle
 //logger.info "Has property 'foo'?: ${project.hasProperty('foo')}"
@@ -103,7 +125,7 @@ if( hasProperty('bogus') ) {
 	logger.warn "The property 'bogus' is not defined!"
 }
 
-project.ext.hellooo = "World"
+project.ext.hellooo = "Worlddd"
 if( hasProperty('hellooo') ) {
 	logger.info hellooo
 	logger.info "The (extra) property 'hellooo' has value [$hellooo]"
