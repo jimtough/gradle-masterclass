@@ -1,14 +1,47 @@
-logger.info "build.gradle | EXECUTED"
 
-logger.info "build.gradle | project.gradle.gradleVersion: $project.gradle.gradleVersion"
-logger.info "build.gradle | project.gradle.gradleHomeDir: $project.gradle.gradleHomeDir"
-logger.info "build.gradle | project.gradle.gradleUserHomeDir: $project.gradle.gradleUserHomeDir"
-logger.info "build.gradle | buildFile: $buildFile"
-logger.info "build.gradle | projectDir: $projectDir"
-logger.info "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
+// These properties are not reflected in the logger output below if they
+// appear after the 'logger.info' statements in this file.
+// These statements are settings properties on the 'Project' interface object.
+group 'com.jimtough'
+version '1.0-SNAPSHOT'
 
 //-----------------------------------------------------------------------------
 
-group 'com.jimtough'
-version '1.0'
+logger.info "build.gradle | EXECUTED"
 
+// build.gradle delegates to the 'Project' interface object. We can refer to it explicitly, as seen below...
+//logger.info "build.gradle | project.gradle.gradleVersion: $project.gradle.gradleVersion"
+// ...but the Project interface properties are also implicitly available
+logger.info "build.gradle | gradle.gradleVersion: $gradle.gradleVersion"
+logger.info "build.gradle | gradle.gradleHomeDir: $gradle.gradleHomeDir"
+logger.info "build.gradle | gradle.gradleUserHomeDir: $gradle.gradleUserHomeDir"
+logger.info "build.gradle | buildFile: $buildFile"
+logger.info "build.gradle | projectDir: $projectDir"
+// Example of using a Project interface method: relativePath()
+logger.info "build.gradle | relativePath(buildFile): ${relativePath(buildFile)}"
+
+// REFERENCE - API docs for the Project interface object
+// https://docs.gradle.org/current/dsl/org.gradle.api.Project.html
+logger.info "build.gradle | buildDir: $buildDir"
+logger.info "build.gradle | defaultTasks: $defaultTasks"
+logger.info "build.gradle | group: $group"
+logger.info "build.gradle | name: $name"
+logger.info "build.gradle | version: $version"
+logger.info "build.gradle | status: $status"
+
+/*
+multiline
+comment
+*/
+
+// Multiline string output
+logger.info """
+******************************************************************************
+Using Gradle $gradle.gradleVersion - http://www.gradle.org
+Gradle home is set to: $gradle.gradleHomeDir
+Gradle user directory is set to: $gradle.gradleUserHomeDir
+
+Base directory: $projectDir
+Running script  ${relativePath(buildFile)}
+******************************************************************************
+"""
