@@ -1,0 +1,9 @@
+import java.text.SimpleDateFormat
+
+gradle.ext.timestamp = {
+	def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+	df.setTimeZone(TimeZone.getTimeZone("UTC"))
+	return df.format(new Date())
+}
+
+println "another.gradle (from USERHOME/.gradle/init.d/) | EXECUTED"

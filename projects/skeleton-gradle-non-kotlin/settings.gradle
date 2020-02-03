@@ -1,2 +1,10 @@
+println "settings.gradle | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
+
+println "settings.gradle | settings.gradle.gradleVersion: $settings.gradle.gradleVersion"
+println "settings.gradle | settings.gradle.gradleHomeDir: $settings.gradle.gradleHomeDir"
+println "settings.gradle | settings.gradle.gradleUserHomeDir: $settings.gradle.gradleUserHomeDir"
+
+//-----------------------------------------------------------------------------
+
 rootProject.name = 'skeleton-gradle-non-kotlin'
 

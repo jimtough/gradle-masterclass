@@ -1,0 +1,1 @@
+println "zingAnother.gradle (from USERHOME/.gradle/init.d/) | EXECUTED | gradle.timestamp(): [${gradle.timestamp()}]"
