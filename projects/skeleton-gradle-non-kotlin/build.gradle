@@ -78,7 +78,10 @@ task doStep2 {
 
 // This Task will trigger 'doStartProcess' and 'doStep2' to run before it.
 // The dependsOn tasks will be triggered regardless of whether or not they were explicitly reqeusted to run elsewhere.
-task doSomethingInTheMiddle (dependsOn: ['doStartProcess', 'doStep2']) {
+// NOTE: See below the use of 'tasks.findAll()' with a custom Closure to specify the task 'doStep2'.
+//       This allows for plenty of flexibility in defining the dependsOn set.
+//task doSomethingInTheMiddle (dependsOn: ['doStartProcess', 'doStep2']) {
+task doSomethingInTheMiddle (dependsOn: ['doStartProcess', project.tasks.findAll { task -> task.name.startsWith('doStep2') }]) {
 	doLast{
 		logger.info "$name - EXECUTED"
 	}
