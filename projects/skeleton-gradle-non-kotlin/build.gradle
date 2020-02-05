@@ -76,25 +76,32 @@ task doStep2 {
 	}
 }
 
-// This Task will trigger 'doStartProcess' and 'doStep2' to run before it.
-// The dependsOn tasks will be triggered regardless of whether or not they were explicitly reqeusted to run elsewhere.
-// NOTE: See below the use of 'tasks.findAll()' with a custom Closure to specify the task 'doStep2'.
-//       This allows for plenty of flexibility in defining the dependsOn set.
 //task doSomethingInTheMiddle (dependsOn: ['doStartProcess', 'doStep2']) {
-task doSomethingInTheMiddle (dependsOn: ['doStartProcess', project.tasks.findAll { task -> task.name.startsWith('doStep2') }]) {
+//task doSomethingInTheMiddle (dependsOn: ['doStartProcess', project.tasks.findAll { task -> task.name.startsWith('doStep2') }]) {
+task doSomethingInTheMiddle {
 	doLast{
 		logger.info "$name - EXECUTED"
 	}
 }
 
-// This Task will trigger 'doSomethingInTheMiddle' and 'doStep2' to run before it.
-// The dependsOn tasks will be triggered regardless of whether or not they were explicitly reqeusted to run elsewhere.
-task doFinished (dependsOn: ['doSomethingInTheMiddle', 'doStep2']) {
+//task doFinished (dependsOn: ['doSomethingInTheMiddle', 'doStep2']) {
+task doFinished {
 	doLast{
 		logger.info "$name - EXECUTED"
 	}
 }
 
+// Refactored to set 'dependsOn()' dependencies individually below,
+// rather than including each with the Task declaration above
+doFinished.dependsOn doSomethingInTheMiddle, doStep2
+doSomethingInTheMiddle.dependsOn doStartProcess
+// We can also put dependsOn() calls inside conditional blocks,
+// if we have a need to conditionally define dependencies
+if (1 == 1) {
+	// NOTE: See below the use of 'tasks.findAll()' with a custom Closure to specify the task 'doStep2'.
+	//       This allows for plenty of flexibility in defining the dependsOn set.
+	doSomethingInTheMiddle.dependsOn project.tasks.findAll { task -> task.name.startsWith('doStep2') }
+}
 
 //-----------------------------------------------------------------------------
 
