@@ -40,8 +40,9 @@ dependencies {
 jar {
 	// 'baseName' is deprecated since Gradle 5.x, and replaced by 'archiveBaseName'
 	println ">>>> BEFORE baseName: [$baseName]"
+	// 'archiveBaseName' is the replacement introduced in Gradle 5.x (it is now a Property<String> type)
 	println ">>>> BEFORE archiveBaseName: [${archiveBaseName.get()}]"
-	baseName = "$project.name-JAR"
+	baseName = "$project.name-UBERJAR"
 	println ">>>> AFTER baseName: [$baseName]"
 	println ">>>> AFTER archiveBaseName: [${archiveBaseName.get()}]"
 
@@ -52,13 +53,31 @@ jar {
 		//  - Passing it a Map<String,String>, defined inline in Groovy syntax for a map
 		//  - Note that the keys (except for 'foo') are part of the Java manifest file specification
 		mf -> mf.attributes 'foo' : 'bar',
-			'Implementation-Title' : 'Gradle-packaged jar!',
+			'Implementation-Title' : 'Gradle-packaged UBERjar!',
 			'Implementation-Version' : project.version,
 			'Created-By' : 'jimtough',
 			'Main-Class' : 'com.jimtough.random.App'
 	}
 
 	println ">>>> manifest.attributes: $manifest.attributes"
+
+	// project.configurations.runtimeClasspath.collect() does this:
+	//  - Access the ConfigurationContainer object of Project
+	//  - Get the 'runtimeClasspath' of the configuration, which should contain all runtime dependencies
+	//  - Use the Groovy method 'collect()' to return all the runtime classpath elements as a collection (of JAR files)
+	println ">>>> project.configurations.runtimeClasspath.collect(): ${project.configurations.runtimeClasspath.collect()}"
+	// This was just to satisfy my own curiousity...
+	//List<FileTree> theList = project.configurations.runtimeClasspath.collect { project.zipTree(it) }
+	//theList.forEach { println it.getFiles().forEach { println it } }
+
+	from {
+		// Now we need to unpack the individual files from each runtime classpath JAR file,
+		// so they can be repacked into the uberjar we are building for this application
+		// VERBOSE SYNTAX:
+		//project.configurations.runtimeClasspath.collect { File file -> project.zipTree(file) }
+		// CONCISE SYNTAX:
+		project.configurations.runtimeClasspath.collect { project.zipTree(it) }
+	}
 
 }
 
