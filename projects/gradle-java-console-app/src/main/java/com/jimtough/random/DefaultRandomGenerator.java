@@ -1,6 +1,6 @@
 package com.jimtough.random;
 
-//import org.apache.commons.math3.random.RandomDataGenerator;
+import org.apache.commons.math3.random.RandomDataGenerator;
 
 public class DefaultRandomGenerator implements RandomGenerator {
 
@@ -9,9 +9,8 @@ public class DefaultRandomGenerator implements RandomGenerator {
 	}
 
 	public int generate() {
-		throw new UnsupportedOperationException("stub");
-//		final RandomDataGenerator aRandomDataGenerator = new RandomDataGenerator();
-//		return aRandomDataGenerator.nextInt(1, 10);
+		final RandomDataGenerator aRandomDataGenerator = new RandomDataGenerator();
+		return aRandomDataGenerator.nextInt(1, 10);
 	}
 
 }

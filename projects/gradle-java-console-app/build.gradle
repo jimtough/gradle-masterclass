@@ -1,6 +1,35 @@
-
+// NOTE: Groovy code CANNOT be used inside the 'plugins' block!
 plugins {
+	// Plugin ids can be enclosed in either single or double quotes
 	id 'java'
+}
+
+repositories {
+	// NOTE: We typically do not explicitly state the 'delegate' property below,
+	//       as it is implied within the context of the 'repositories' block.
+	//       The delegate type in this context is a 'RepositoryHandler'.
+	// REF: https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:repositories
+	//delegate.mavenCentral()
+	mavenCentral()
+}
+
+dependencies {
+	// The delegate object type in this context is 'DependencyHandler'.
+	// REF: https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:dependencies
+
+	//-------------------------------------------------------------------------------------
+	// Add dependency for 'Apache Common Math' third-party library
+	//
+	// There are two forms of Maven coordinates that you can use here
+	// LONG VERSION (each component of coordinates is specified by name):
+	//implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+	// SHORT VERSION (each component in a single string, in order, separated by colons):
+	implementation 'org.apache.commons:commons-math3:3.6.1'
+	//-------------------------------------------------------------------------------------
+
+	// Add (test) dependency for 'JUnit' third-party library (legacy JUnit, not JUnit 5!)
+	testImplementation 'junit:junit:4.13'
+
 }
 
 group 'com.jimtough'
