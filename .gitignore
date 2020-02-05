@@ -7,3 +7,7 @@ projects/gradle-with-groovy-examples/gradle/wrapper/gradle-wrapper.jar
 projects/skeleton-gradle-non-kotlin/.gradle/
 projects/skeleton-gradle-non-kotlin/.idea/
 projects/skeleton-gradle-non-kotlin/gradle/wrapper/gradle-wrapper.jar
+projects/gradle-java-console-app/.gradle/
+projects/gradle-java-console-app/.idea/
+projects/gradle-java-console-app/build/
+projects/gradle-java-console-app/gradle/wrapper/gradle-wrapper.jar
