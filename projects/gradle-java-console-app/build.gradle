@@ -4,6 +4,9 @@ plugins {
 	id 'java'
 }
 
+group 'com.jimtough'
+version '1.0-SNAPSHOT'
+
 repositories {
 	// NOTE: We typically do not explicitly state the 'delegate' property below,
 	//       as it is implied within the context of the 'repositories' block.
@@ -32,6 +35,30 @@ dependencies {
 
 }
 
-group 'com.jimtough'
-version '1.0-SNAPSHOT'
+// Adding the 'jar' task, to package the application as an executable .jar file
+// REFERENCE: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
+jar {
+	// 'baseName' is deprecated since Gradle 5.x, and replaced by 'archiveBaseName'
+	println ">>>> BEFORE baseName: [$baseName]"
+	println ">>>> BEFORE archiveBaseName: [${archiveBaseName.get()}]"
+	baseName = "$project.name-JAR"
+	println ">>>> AFTER baseName: [$baseName]"
+	println ">>>> AFTER archiveBaseName: [${archiveBaseName.get()}]"
+
+	manifest {
+		// Manifest object API: https://docs.gradle.org/current/javadoc/org/gradle/api/java/archives/Manifest.html
+		// Doing the following below:
+		//  - Calling the 'attributes()' method on the delegate object for this Closure (a Manifest object)
+		//  - Passing it a Map<String,String>, defined inline in Groovy syntax for a map
+		//  - Note that the keys (except for 'foo') are part of the Java manifest file specification
+		mf -> mf.attributes 'foo' : 'bar',
+			'Implementation-Title' : 'Gradle-packaged jar!',
+			'Implementation-Version' : project.version,
+			'Created-By' : 'jimtough',
+			'Main-Class' : 'com.jimtough.random.App'
+	}
+
+	println ">>>> manifest.attributes: $manifest.attributes"
+
+}
 
