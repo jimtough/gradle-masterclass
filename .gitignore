@@ -29,3 +29,6 @@ projects/hello-world-kt/.gradle/
 projects/hello-world-kt/.idea/
 projects/hello-world/build/
 projects/hello-world-kt/build/
+projects/gradle-java-console-app-kotlin/.gradle/
+projects/gradle-java-console-app-kotlin/.idea/
+projects/gradle-java-console-app-kotlin/build/

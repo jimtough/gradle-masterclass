@@ -1,0 +1,79 @@
+// NOTE: Groovy code CANNOT be used inside the 'plugins' block!
+plugins {
+	// Plugin ids can be enclosed in either single or double quotes
+	id 'java'
+}
+
+group 'com.jimtough'
+version '1.0-SNAPSHOT'
+
+repositories {
+	// NOTE: We typically do not explicitly state the 'delegate' property below,
+	//       as it is implied within the context of the 'repositories' block.
+	//       The delegate type in this context is a 'RepositoryHandler'.
+	// REF: https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:repositories
+	//delegate.mavenCentral()
+	mavenCentral()
+}
+
+dependencies {
+	// The delegate object type in this context is 'DependencyHandler'.
+	// REF: https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:dependencies
+
+	//-------------------------------------------------------------------------------------
+	// Add dependency for 'Apache Common Math' third-party library
+	//
+	// There are two forms of Maven coordinates that you can use here
+	// LONG VERSION (each component of coordinates is specified by name):
+	//implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+	// SHORT VERSION (each component in a single string, in order, separated by colons):
+	implementation 'org.apache.commons:commons-math3:3.6.1'
+	//-------------------------------------------------------------------------------------
+
+	// Add (test) dependency for 'JUnit' third-party library (legacy JUnit, not JUnit 5!)
+	testImplementation 'junit:junit:4.13'
+
+}
+
+// Adding the 'jar' task, to package the application as an executable .jar file
+// REFERENCE: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
+jar {
+	logger.info ">>>> BEFORE archiveBaseName: [${archiveBaseName.get()}]"
+	archiveBaseName = "$project.name-UBERJAR"
+	logger.info ">>>> AFTER archiveBaseName: [${archiveBaseName.get()}]"
+
+	manifest {
+		// Manifest object API: https://docs.gradle.org/current/javadoc/org/gradle/api/java/archives/Manifest.html
+		// Doing the following below:
+		//  - Calling the 'attributes()' method on the delegate object for this Closure (a Manifest object)
+		//  - Passing it a Map<String,String>, defined inline in Groovy syntax for a map
+		//  - Note that the keys (except for 'foo') are part of the Java manifest file specification
+		mf -> mf.attributes 'foo' : 'bar',
+			'Implementation-Title' : 'Gradle-packaged UBERjar!',
+			'Implementation-Version' : project.version,
+			'Created-By' : 'jimtough',
+			'Main-Class' : 'com.jimtough.random.App'
+	}
+
+	logger.info ">>>> manifest.attributes: $manifest.attributes"
+
+	// project.configurations.runtimeClasspath.collect() does this:
+	//  - Access the ConfigurationContainer object of Project
+	//  - Get the 'runtimeClasspath' of the configuration, which should contain all runtime dependencies
+	//  - Use the Groovy method 'collect()' to return all the runtime classpath elements as a collection (of JAR files)
+	logger.info ">>>> project.configurations.runtimeClasspath.collect(): ${project.configurations.runtimeClasspath.collect()}"
+	// This was just to satisfy my own curiousity...
+	//List<FileTree> theList = project.configurations.runtimeClasspath.collect { project.zipTree(it) }
+	//theList.forEach { println it.getFiles().forEach { println it } }
+
+	from {
+		// Now we need to unpack the individual files from each runtime classpath JAR file,
+		// so they can be repacked into the uberjar we are building for this application
+		// VERBOSE SYNTAX:
+		//project.configurations.runtimeClasspath.collect { File file -> project.zipTree(file) }
+		// CONCISE SYNTAX:
+		project.configurations.runtimeClasspath.collect { project.zipTree(it) }
+	}
+
+}
+
