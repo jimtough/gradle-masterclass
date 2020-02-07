@@ -77,3 +77,8 @@ Gradle diagnostic information to be displayed in the console.
     * Each of these methods has two versions, but the version that accepts a Closure should be preferred
       * Closure version also gives us a way to access the Task
       * Closure version makes it easy to chain multiple calls together
+
+### Gradle project dependencies
+
+* Use the 'help' task named 'dependencies' to generate a text-based dependency graph
+  * To generate an HTML-based report, add the 'project-report' plugin, and execute the 'htmlDependencyReport' task
