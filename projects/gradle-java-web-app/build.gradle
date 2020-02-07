@@ -1,5 +1,7 @@
 plugins {
 	id 'java'
+	// Add core Gradle 'war' plugin for building old-style 'Webapp ARchive'
+	id 'war'
 }
 
 group 'com.jimtough'
@@ -8,7 +10,12 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories{
+// Moved the 'tomcatHome' property to gradle.properties file
+//ext.tomcatHome = 'C:/Java/DEVAPPS/apache-tomcat-9.0.30'
+ext.tomcatWebapps = "$tomcatHome/webapps"
+println "ext.tomcatWebapps: [$ext.tomcatWebapps]"
+
+repositories {
 	mavenCentral()
 }
 
@@ -20,7 +27,23 @@ dependencies {
 	implementation 'jstl:jstl:1.2'
 	implementation 'log4j:log4j:1.2.17'
 
+	// compileOnly does what 'provided' used to do in Maven.
+	// It is assumed that this library will be provided by the webapp container at runtime.
 	compileOnly "javax.servlet:javax.servlet-api:3.0.1"
+
 	testImplementation	'junit:junit:4.11'
 
+}
+
+// Create a Closure to configure the 'war' task
+war {
+	// Use the (deprecated) 'archiveName' property to set the name of the output .war file
+	archiveName = 'mywebapp.war'
+}
+
+// REFERENCE: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Copy.html
+task deployToTomcat(type: Copy, dependsOn: 'war') {
+	// REFERENCE: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.War.html
+	from war.archivePath
+	into "$tomcatWebapps"
 }
