@@ -19,4 +19,7 @@ projects/gradle-multi-project-app-alpha/.idea/
 projects/gradle-multi-project-app-alpha/picker-number-app-1/build/
 projects/gradle-multi-project-app-alpha/plus-plus/build/
 projects/gradle-multi-project-app-alpha/random-number-gen-1/build/
+projects/gradle-teaching-academy/**/build/
 *.project
+projects/gradle-teaching-academy/.idea/
+projects/gradle-teaching-academy/.gradle/

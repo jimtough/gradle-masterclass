@@ -82,3 +82,22 @@ Gradle diagnostic information to be displayed in the console.
 
 * Use the 'help' task named 'dependencies' to generate a text-based dependency graph
   * To generate an HTML-based report, add the 'project-report' plugin, and execute the 'htmlDependencyReport' task
+
+## About the 'gradle-teaching-academy' demo project
+
+This one is interesting. It is a multi-project setup with about 20 subprojects that are composed into a web app.
+Some of the subprojects are meant to demonstrate code reuse, where other teams within an organization could use
+those individual components in other projects.
+
+Some interesting points to note:
+* Each subproject uses a custom name for its build file that is <subproject-name>.gradle.
+  * In 'settings.gradle', there is a 'rootProject.children.each' call where the Closure does this: `subproject.buildFileName = "${subproject.name}.gradle"`
+  * I like this, because it avoids confusion of having many subproject 'build.gradle' files.
+  * Not sure why, but 'academy-shared' does NOT follow this pattern.
+* The following properties are defined in the 'gradle.properties' file of the root project:
+  * `theGroup=com.denofprogramming`
+  * `theName=academy`
+  * `theVersion=0.0.2-SNAPSHOT`
+  * `theSourceCompatibility=1.8`
+  * The root project build.gradle and settings.gradle files reference those externalized properties
+ 
