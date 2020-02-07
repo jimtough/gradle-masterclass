@@ -32,3 +32,9 @@ projects/hello-world-kt/build/
 projects/gradle-java-console-app-kotlin/.gradle/
 projects/gradle-java-console-app-kotlin/.idea/
 projects/gradle-java-console-app-kotlin/build/
+projects/my-gradle-6-hello-world/.gradle/
+projects/my-gradle-6-hello-world/.idea/
+projects/my-gradle-6-hello-world/build/
+projects/my-gradle-6-hello-world/gradle/wrapper/
+projects/my-gradle-6-hello-world/gradlew
+projects/my-gradle-6-hello-world/gradlew.bat
