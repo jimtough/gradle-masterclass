@@ -27,3 +27,5 @@ projects/hello-world/.gradle/
 projects/hello-world/.idea/
 projects/hello-world-kt/.gradle/
 projects/hello-world-kt/.idea/
+projects/hello-world/build/
+projects/hello-world-kt/build/
