@@ -1,3 +1,4 @@
+// settings.gradle is a MANDATORY file in multi-project builds. The next line illustrates one reason why.
 include 'picker-number-app-1', 'plus-plus', 'random-number-gen-1'
 
 rootProject.name = 'gradle-multi-project-app-alpha'

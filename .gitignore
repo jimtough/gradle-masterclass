@@ -16,3 +16,6 @@ projects/gradle-java-web-app/.gradle/
 projects/gradle-java-web-app/build/
 projects/gradle-multi-project-app-alpha/.gradle/
 projects/gradle-multi-project-app-alpha/.idea/
+projects/gradle-multi-project-app-alpha/picker-number-app-1/build/
+projects/gradle-multi-project-app-alpha/plus-plus/build/
+projects/gradle-multi-project-app-alpha/random-number-gen-1/build/
