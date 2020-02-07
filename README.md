@@ -82,6 +82,8 @@ Gradle diagnostic information to be displayed in the console.
 
 * Use the 'help' task named 'dependencies' to generate a text-based dependency graph
   * To generate an HTML-based report, add the 'project-report' plugin, and execute the 'htmlDependencyReport' task
+* The 'java-library' plugin dependency scope 'api', when used on a project dependency, will expose that project's transitive dependencies
+
 
 ## About the 'gradle-teaching-academy' demo project
 
@@ -100,4 +102,6 @@ Some interesting points to note:
   * `theVersion=0.0.2-SNAPSHOT`
   * `theSourceCompatibility=1.8`
   * The root project build.gradle and settings.gradle files reference those externalized properties
- 
+* The large number of subprojects demonstrates how Gradle works well as an 'incremental build system'
+  * Subprojects are only rebuilt if changes since the last build are detected
+
