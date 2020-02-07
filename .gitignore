@@ -23,3 +23,7 @@ projects/gradle-teaching-academy/**/build/
 *.project
 projects/gradle-teaching-academy/.idea/
 projects/gradle-teaching-academy/.gradle/
+projects/hello-world/.gradle/
+projects/hello-world/.idea/
+projects/hello-world-kt/.gradle/
+projects/hello-world-kt/.idea/
