@@ -14,3 +14,5 @@ projects/gradle-java-console-app/gradle/wrapper/gradle-wrapper.jar
 projects/gradle-java-web-app/.idea/
 projects/gradle-java-web-app/.gradle/
 projects/gradle-java-web-app/build/
+projects/gradle-multi-project-app-alpha/.gradle/
+projects/gradle-multi-project-app-alpha/.idea/
