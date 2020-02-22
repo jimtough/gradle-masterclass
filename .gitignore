@@ -38,3 +38,9 @@ projects/my-gradle-6-hello-world/build/
 projects/my-gradle-6-hello-world/gradle/wrapper/
 projects/my-gradle-6-hello-world/gradlew
 projects/my-gradle-6-hello-world/gradlew.bat
+projects/gradle-multi-project/.gradle/
+projects/gradle-multi-project/.idea/
+projects/gradle-multi-project/library-hello-factory/build/
+projects/gradle-multi-project/library-world-factory/build/
+projects/gradle-multi-project/app-console-helloworld/build/
+projects/gradle-multi-project/build/
