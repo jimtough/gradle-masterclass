@@ -4,8 +4,25 @@ val baseGroupForSubprojects = "com.jimtough.gradle.mp"
 // Add IntelliJ IDEA plugin
 apply(plugin="idea")
 
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
 plugins {
 	java
+
+	//----------------------------------------------------------------------------------------------------------
+	// This part still isn't clear to me. I need these two plugins only for the Spring Boot subproject.
+	// If I try to declare them only in the subproject 'build.gradle.kts' file, then I end up with errors
+	// in the build scripts inside IntelliJ.
+	// With these two declarations also added here, things work again. I'm guessing the 'apply false' is
+	// where the magic happens. The plugin requirements are declared here, but only 'applied' in my subproject?
+	id("org.springframework.boot") version "2.2.5.RELEASE" apply false
+	// REFERENCE: https://mvnrepository.com/artifact/io.spring.dependency-management/io.spring.dependency-management.gradle.plugin
+	id("io.spring.dependency-management") version "1.0.9.RELEASE" apply false
+	//----------------------------------------------------------------------------------------------------------
 }
 
 // The settings inside this Closure will be applied to the root project and each subproject.
@@ -82,6 +99,9 @@ subprojects {
 // NOTE: Must use colon-prefix notation when referring to a subproject by name.
 //       In the case where subprojects are nested more than one level deep (not done in this example),
 //       one must separate each nesting level with a colon like ':childprj:grandchildprj'.
+// NOTE: Another alternative is to put subproject-specific configuration into the 'build.gradle.kts'
+//       file for each subproject. I don't know if there are limitations to either approach,
+//       or if this is simply a matter of developer preference.
 project(":library-hello-factory") {
 	group = "${baseGroupForSubprojects}.hellofactory"
 
