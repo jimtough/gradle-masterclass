@@ -44,3 +44,4 @@ projects/gradle-multi-project/library-hello-factory/build/
 projects/gradle-multi-project/library-world-factory/build/
 projects/gradle-multi-project/app-console-helloworld/build/
 projects/gradle-multi-project/build/
+projects/gradle-multi-project/app-springboot-helloworld/build/
