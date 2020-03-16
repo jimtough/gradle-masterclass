@@ -4,12 +4,6 @@ val baseGroupForSubprojects = "com.jimtough.gradle.mp"
 // Add IntelliJ IDEA plugin
 apply(plugin="idea")
 
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-}
-
 plugins {
 	java
 
@@ -35,6 +29,7 @@ allprojects {
 	// Pull all dependencies from Maven Central
 	repositories {
 		mavenCentral()
+		jcenter()
 	}
 }
 
@@ -166,7 +161,7 @@ project(":app-console-helloworld") {
 // Applies to entire build
 tasks {
 	wrapper {
-		gradleVersion = "6.2"
+		gradleVersion = "6.2.2"
 		distributionType = Wrapper.DistributionType.ALL
 	}
 }

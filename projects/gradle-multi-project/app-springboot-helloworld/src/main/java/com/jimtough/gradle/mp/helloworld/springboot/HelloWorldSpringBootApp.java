@@ -31,6 +31,7 @@ public class HelloWorldSpringBootApp {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return (args) -> {
 			LOGGER.info("My CommandLineRunner was invoked | {}", Arrays.toString(args));
+			LOGGER.info("Open this URL in a browser if running locally: http://localhost:8080/");
 		};
 	}
 
