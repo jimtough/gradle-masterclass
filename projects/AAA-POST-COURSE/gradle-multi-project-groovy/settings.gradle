@@ -1,0 +1,4 @@
+// settings.gradle is a MANDATORY file in multi-project builds. The next line illustrates one reason why.
+include 'library-hello-factory', 'library-world-factory', 'app-console-helloworld', 'app-springboot-helloworld'
+
+rootProject.name = 'gradle-multi-project-groovy-root'

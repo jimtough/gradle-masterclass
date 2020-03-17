@@ -42,3 +42,10 @@ projects/AAA-POST-COURSE/gradle-multi-project-kotlin/library-world-factory/build
 projects/AAA-POST-COURSE/my-gradle-6-hello-world/.gradle/
 projects/AAA-POST-COURSE/my-gradle-6-hello-world/.idea/
 projects/AAA-POST-COURSE/my-gradle-6-hello-world/build/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/.gradle/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/.idea/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/build/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/library-world-factory/build/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/library-hello-factory/build/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/app-console-helloworld/build/
+projects/AAA-POST-COURSE/gradle-multi-project-groovy/app-springboot-helloworld/build/
