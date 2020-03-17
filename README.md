@@ -35,6 +35,10 @@ When running the build from inside IntelliJ, you need to edit your run configura
 This will not only enable calls to 'logger.info', etc., but it will cause a lot more
 Gradle diagnostic information to be displayed in the console. 
 
+### The 'AAA-POST-COURSE' directory
+
+After I finished the course, I chose to create some more Gradle projects in this Git repo to learn specific things. These were not part of the course.
+
 
 ## Gradle notes
 
