@@ -1,4 +1,4 @@
-rootProject.name = "gradle-multiproject-root"
+rootProject.name = "gradle-multi-project-kotlin-root"
 
 include("library-hello-factory")
 include("library-world-factory")
